@@ -141,8 +141,8 @@ export default {
 	testEnvironment: 'jsdom',
 
 	testMatch: [
-		// '**/?(*.)+(spec|test).[tj]s?(x)'
-		'**/test/requestAdapter.spec.ts(x)?'
+		'**/?(*.)+(spec|test).[tj]s?(x)'
+		// '**/test/requestAdapter.spec.ts(x)?'
 		// '**/test/storageAdapter.spec.ts(x)?'
 	],
 

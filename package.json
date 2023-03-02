@@ -1,6 +1,6 @@
 {
 	"name": "@alova/adapter-taro",
-	"version": "1.0.0-alpha.1",
+	"version": "1.0.0",
 	"description": "taro adapter for alova.js",
 	"homepage": "https://alova.js.org",
 	"main": "dist/alova-adapter-taro.umd.min.js",

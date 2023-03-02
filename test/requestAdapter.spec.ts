@@ -5,8 +5,9 @@ import { noop } from '../src/helper';
 import AdapterTaro from '../src/index';
 import { onDownloadCall, onRequestCall, onUploadCall, untilCbCalled } from './utils';
 
+jest.mock('@tarojs/taro');
 describe('request adapter', () => {
-	test.only('should call uni.request and pass the right args', async () => {
+	test('should call uni.request and pass the right args', async () => {
 		const alovaInst = createAlova({
 			baseURL: 'http://xxx',
 			beforeRequest(method) {
@@ -260,7 +261,7 @@ describe('request adapter', () => {
 		await untilCbCalled(onSuccess);
 		expect(mockFn).toBeCalledTimes(1);
 		expect(loading.value).toBeFalsy();
-		expect(data.value).toBe('success');
+		expect(data.value).toStrictEqual({ header: {}, url: 'http://xxx/unit-test' });
 		expect(uploading.value).toEqual({ total: 200, loaded: 200 });
 		expect(downloading.value).toEqual({ total: 0, loaded: 0 });
 		expect(error.value).toBeUndefined();
@@ -333,7 +334,8 @@ describe('request adapter', () => {
 		expect(mockFn).toBeCalledTimes(1);
 		expect(loading.value).toBeFalsy();
 		expect(data.value.statusCode).toBe(200);
-		expect(data.value.tempFilePath).toBe('test_path');
+		expect(data.value.tempFilePath).toBe('test_temp_path');
+		expect(data.value.filePath).toBe('test_path');
 		expect(uploading.value).toEqual({ total: 0, loaded: 0 });
 		expect(downloading.value).toEqual({ total: 200, loaded: 200 });
 		expect(error.value).toBeUndefined();

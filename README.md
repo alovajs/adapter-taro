@@ -2,13 +2,13 @@
 
 alova 的 uniapp 适配器
 
-[![npm](https://img.shields.io/npm/v/@alova/adapter-uniapp)](https://www.npmjs.com/package/@alova/adapter-uniapp)
-[![build](https://github.com/alovajs/adapter-uniapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/alovajs/adapter-uniapp/actions/workflows/main.yml)
-[![coverage status](https://coveralls.io/repos/github/alovajs/adapter-uniapp/badge.svg?branch=main)](https://coveralls.io/github/alovajs/adapter-uniapp?branch=main)
+[![npm](https://img.shields.io/npm/v/@alova/adapter-taro)](https://www.npmjs.com/package/@alova/adapter-taro)
+[![build](https://github.com/alovajs/adapter-taro/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/alovajs/adapter-taro/actions/workflows/main.yml)
+[![coverage status](https://coveralls.io/repos/github/alovajs/adapter-taro/badge.svg?branch=main)](https://coveralls.io/github/alovajs/adapter-taro?branch=main)
 ![typescript](https://badgen.net/badge/icon/typescript?icon=typescript&label)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-[官网](https://alova.js.org/extension/alova-adapter-uniapp) | [核心库 alova](https://github.com/alovajs/alova)
+[官网](https://alova.js.org/extension/alova-adapter-taro) | [核心库 alova](https://github.com/alovajs/alova)
 
 ## 使用方法
 

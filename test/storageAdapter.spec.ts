@@ -1,8 +1,9 @@
 import Taro from '@tarojs/taro';
 import { createAlova, getMethodKey, invalidateCache } from 'alova';
-import AdapterUniapp from '../src/index';
+import AdapterTaro from '../src/index';
 import { mockStorageContainer } from './utils';
 
+jest.mock('@tarojs/taro');
 const alovaInst = createAlova({
 	baseURL: 'http://xxx',
 	responsed(data) {
@@ -12,7 +13,7 @@ const alovaInst = createAlova({
 		}
 		return null;
 	},
-	...AdapterUniapp()
+	...AdapterTaro()
 });
 interface ResponseData {
 	url: string;
@@ -39,7 +40,7 @@ describe('storage adapter', () => {
 		 * 缓存数据如下：
 		 * [{"url":"http://xxx/unit-test","method":"GET","header":{}},1677564705831,null]
 		 */
-		const storagedData = JSON.parse(mockStorageContainer[`alova.${alovaInst.id}${getMethodKey(Get)}`] || '{}');
+		const storagedData = mockStorageContainer[`alova.${alovaInst.id}${getMethodKey(Get)}`] || {};
 		expect(storagedData[0]?.url).toBe('http://xxx/unit-test');
 		expect(storagedData[0]?.method).toBe('GET');
 		expect(storagedData[0]?.header).toStrictEqual({});
