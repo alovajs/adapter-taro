@@ -3,7 +3,7 @@ import { AlovaGlobalStorage, AlovaRequestAdapter, ProgressUpdater } from 'alova'
 import ReactHook from 'alova/react';
 
 /**
- * uni.request请求额外参数
+ * Taro.request请求额外参数
  */
 export type TaroRequestConfig = Omit<
 	Taro.request.Option,
@@ -11,7 +11,7 @@ export type TaroRequestConfig = Omit<
 >;
 
 /**
- * uni.uploadFile额外参数
+ * Taro.uploadFile额外参数
  */
 export type TaroUploadConfig = Omit<
 	Taro.uploadFile.Option,
@@ -19,7 +19,7 @@ export type TaroUploadConfig = Omit<
 >;
 
 /**
- * uni.downloadFile额外参数
+ * Taro.downloadFile额外参数
  */
 export type TaroDownloadConfig = Omit<
 	Taro.downloadFile.Option,
