@@ -144,6 +144,7 @@ export default {
 		'**/?(*.)+(spec|test).[tj]s?(x)'
 		// '**/test/requestAdapter.spec.ts(x)?'
 		// '**/test/storageAdapter.spec.ts(x)?'
+		// '**/test/mockResponse.spec.ts(x)?'
 	],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped

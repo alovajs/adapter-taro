@@ -1,5 +1,5 @@
 import Taro from '@tarojs/taro';
-import { AlovaGlobalStorage, Method, ProgressUpdater, RequestElements } from 'alova';
+import { AlovaGlobalStorage, AlovaRequestAdapter, ProgressUpdater } from 'alova';
 import ReactHook from 'alova/react';
 
 /**
@@ -53,29 +53,66 @@ interface TaroRequestAdapterReturn {
 	onUpload: (handler: ProgressUpdater) => void;
 }
 
+export interface AdapterTaroOptions {
+	mockRequest?: AlovaRequestAdapter<any, any, any, any, any>;
+}
+
 /**
  * taro请求适配器
  */
-export interface TaroRequestAdapter {
-	(
-		elements: RequestElements,
-		method: Method<
-			any,
-			any,
-			any,
-			any,
-			TaroConfig,
-			| Taro.uploadFile.SuccessCallbackResult
-			| Taro.downloadFile.FileSuccessCallbackResult
-			| Taro.request.SuccessCallbackResult<any>,
-			Taro.request.SuccessCallbackResult<any>['header']
-		>
-	): TaroRequestAdapterReturn;
-}
+export type TaroRequestAdapter = AlovaRequestAdapter<
+	any,
+	any,
+	TaroConfig,
+	| Taro.uploadFile.SuccessCallbackResult
+	| Taro.downloadFile.FileSuccessCallbackResult
+	| Taro.request.SuccessCallbackResult<any>,
+	Taro.request.SuccessCallbackResult<any>['header']
+>;
 
-declare function AdapterTaro(): {
+/**
+ * taro请求适配器
+ */
+export declare const taroRequestAdapter: TaroRequestAdapter;
+/**
+ * taro存储适配器
+ */
+export declare const taroStorageAdapter: AlovaGlobalStorage;
+
+/**
+ * 适配器集合
+ * @param options 请求配置参数
+ */
+declare function AdapterTaro(options?: AdapterTaroOptions): {
 	statesHook: typeof ReactHook;
 	requestAdapter: TaroRequestAdapter;
 	storageAdapter: AlovaGlobalStorage;
 };
 export default AdapterTaro;
+
+/**
+ * 模拟响应适配器，它用于@alova/mock中，让模拟请求时也能返回Taro响应数据兼容的格式
+ * @example
+ * ```js
+ * import AdapterTaro, { taroRequestAdapter } from '@alova/adapter-taro';
+ *
+ * const mockRequestAdapter = createAlovaMockAdapter([mocks], {
+ *		delay: 1000,
+ *		onMockResponse: mockResponse,
+ *    httpAdapter: taroRequestAdapter
+ * });
+ *	const alovaInst = createAlova({
+ *		baseURL: 'http://xxx',
+ *		...AdapterTaro({
+ *      mockAdapter: process.env.NODE_ENV === 'development' ? mockRequestAdapter : undefined
+ *    }),
+ *	});
+ * ```
+ */
+export declare const taroMockResponse: MockResponse<
+	TaroConfig,
+	| Taro.uploadFile.SuccessCallbackResult
+	| Taro.downloadFile.FileSuccessCallbackResult
+	| Taro.request.SuccessCallbackResult<any>,
+	Taro.request.SuccessCallbackResult<any>['header']
+>;

@@ -1,25 +1,12 @@
 import Taro from '@tarojs/taro';
-import { AlovaRequestAdapter, Arg, Method, ProgressUpdater, RequestElements } from 'alova';
-import { TaroConfig } from '../typings';
+import { AlovaRequestAdapter, Arg, ProgressUpdater } from 'alova';
+import { TaroRequestAdapter } from '../typings';
 import { isPlainObject, noop } from './helper';
 
 /**
  * Uniapp请求适配器
  */
-export default (
-	elements: RequestElements,
-	method: Method<
-		any,
-		any,
-		any,
-		any,
-		TaroConfig,
-		| Taro.uploadFile.SuccessCallbackResult
-		| Taro.downloadFile.FileSuccessCallbackResult
-		| Taro.request.SuccessCallbackResult<any>,
-		Taro.request.SuccessCallbackResult<any>['header']
-	>
-) => {
+const requestAdapter: TaroRequestAdapter = (elements, method) => {
 	const { url, data, type, headers: header } = elements;
 	let taskInstance: Taro.RequestTask<any> | Taro.UploadTask.UploadTaskPromise | Taro.DownloadTask.DownloadTaskPromise;
 	let onDownload: ReturnType<AlovaRequestAdapter<any, any, any, any, any>>['onDownload'] = noop,
@@ -108,3 +95,5 @@ export default (
 		onUpload
 	};
 };
+
+export default requestAdapter;
