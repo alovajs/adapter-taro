@@ -7,7 +7,7 @@ type TaroResponse =
 	| Taro.request.SuccessCallbackResult<any>;
 const mockResponseHandler: MockResponse<TaroConfig, TaroResponse, Taro.request.SuccessCallbackResult<any>['header']> = (
 	{ status, statusText, body },
-	{ data, query },
+	_,
 	currentMethod
 ) => {
 	const { requestType } = currentMethod.config;
