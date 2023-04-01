@@ -1,6 +1,6 @@
 import { createAlovaMockAdapter, defineMock } from '@alova/mock';
 import { createAlova, invalidateCache } from 'alova';
-import AdapterTaro, { taroMockResponse, taroRequestAdapter } from '../src/index';
+import AdapterTaro, { taroMockResponse, taroRequestAdapter } from '../src/adapterReact';
 
 const mocks = defineMock({
 	'/unit-test': () => {

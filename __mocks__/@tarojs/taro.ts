@@ -28,7 +28,6 @@ export default <TaroMockMap>{
 	 * @param options 请求参数
 	 */
 	request(options) {
-		console.log(1);
 		taroRequestConfig.handler && taroRequestConfig.handler(options);
 		const timer = setTimeout(() => {
 			if (!taroRequestConfig.error && options.success) {
