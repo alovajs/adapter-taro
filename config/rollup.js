@@ -29,10 +29,21 @@ exports.banner = `/**
   */
 `;
 
-const compilePath = (exports.compilePath = {
-	external: ['alova', 'alova/react', '@tarojs/taro'],
-	packageName: 'AlovaAdapterTaro',
-	input: 'src/index.ts',
-	output: suffix => `dist/alova-adapter-taro.${suffix}.js`
-});
-exports.external = compilePath.external;
+const compilePaths = {
+	core: {
+		external: ['alova', 'alova/react', '@tarojs/taro'],
+		packageName: 'AlovaAdapterTaro',
+		input: 'src/adapterReact.ts',
+		output: suffix => `dist/alova-adapter-taro.${suffix}.js`
+	},
+	vue: {
+		external: ['alova', 'alova/react', '@tarojs/taro'],
+		packageName: 'AlovaAdapterTaroVue',
+		input: 'src/adapterVue.ts',
+		output: suffix => `dist/alova-adapter-taro-vue.${suffix}.js`
+	}
+};
+
+const compileModule = process.env.MODULE || 'core';
+exports.external = compilePaths[compileModule].external || [];
+exports.compilePath = compilePaths[compileModule];

@@ -1,8 +1,7 @@
 import Taro from '@tarojs/taro';
 import { createAlova, useRequest } from 'alova';
-import VueHook from 'alova/vue';
+import AdapterTaro from '../src/adapterVue';
 import { noop } from '../src/helper';
-import AdapterTaro from '../src/index';
 import { onDownloadCall, onRequestCall, onUploadCall, untilCbCalled } from './utils';
 
 jest.mock('@tarojs/taro');
@@ -29,8 +28,7 @@ describe('request adapter', () => {
 				}
 				return null;
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		interface ResponseData {
@@ -83,8 +81,7 @@ describe('request adapter', () => {
 				}
 				return null;
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		interface ResponseData {
@@ -146,8 +143,7 @@ describe('request adapter', () => {
 					throw error;
 				}
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		interface ResponseData {
@@ -184,8 +180,7 @@ describe('request adapter', () => {
 				}
 				return null;
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		interface ResponseData {
@@ -224,8 +219,7 @@ describe('request adapter', () => {
 				}
 				return null;
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		const Post = alovaInst.Post<string>(
@@ -278,8 +272,7 @@ describe('request adapter', () => {
 				}
 				return null;
 			},
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		const Post = alovaInst.Post<string>(
@@ -311,8 +304,7 @@ describe('request adapter', () => {
 	test('should call uni.downloadFile and pass the right args', async () => {
 		const alovaInst = createAlova({
 			baseURL: 'http://xxx',
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		const Get = alovaInst.Get<Taro.downloadFile.FileSuccessCallbackResult>('/unit-test', {
@@ -344,8 +336,7 @@ describe('request adapter', () => {
 	test('should cancel request when call `task.abort` returned by uni.downloadFile', async () => {
 		const alovaInst = createAlova({
 			baseURL: 'http://xxx',
-			...AdapterTaro(),
-			statesHook: VueHook
+			...AdapterTaro()
 		});
 
 		const Get = alovaInst.Get<Taro.downloadFile.FileSuccessCallbackResult>('/unit-test', {

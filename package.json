@@ -1,10 +1,9 @@
 {
 	"name": "@alova/adapter-taro",
-	"version": "1.1.1",
+	"version": "1.2.0-alpha",
 	"description": "taro adapter for alova.js",
 	"homepage": "https://alova.js.org",
-	"main": "dist/alova-adapter-taro.umd.min.js",
-	"jsnext:main": "dist/alova-adapter-taro.esm.js",
+	"main": "dist/alova-adapter-taro.esm.js",
 	"module": "dist/alova-adapter-taro.esm.js",
 	"types": "typings/index.d.ts",
 	"keywords": [
@@ -27,12 +26,27 @@
 		"build:esm": "cross-env NODE_ENV=development rollup -c ./config/rollup.config.esm.js",
 		"build:umd": "cross-env NODE_ENV=development rollup -c ./config/rollup.config.umd.js",
 		"build:umd.min": "cross-env NODE_ENV=production rollup -c ./config/rollup.config.umd.js",
-		"build": "npm run clean && npm run build:esm && npm run build:umd && npm run build:umd.min",
+		"build:vue:esm": "cross-env MODULE=vue rollup -c config/rollup.config.esm.js",
+		"build:vue:umd": "cross-env NODE_ENV=development MODULE=vue rollup -c config/rollup.config.umd.js",
+		"build:vue:umd.min": "cross-env NODE_ENV=production MODULE=vue rollup -c config/rollup.config.umd.js",
+		"build:vue": "npm run build:vue:esm && npm run build:vue:umd && npm run build:vue:umd.min",
+		"build": "npm run clean && npm run build:esm && npm run build:umd && npm run build:umd.min && npm run build:vue",
 		"release": "npm publish",
 		"coveralls": "npm run test:coverage && coveralls < coverage/lcov.info"
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"exports": {
+		".": "./dist/alova-adapter-taro.esm.js",
+		"./vue": "./dist/alova-adapter-taro-vue.esm.js"
+	},
+	"typesVersions": {
+		"*": {
+			"vue": [
+				"typings/adaptervue.d.ts"
+			]
+		}
 	},
 	"author": "JOU-amjs",
 	"license": "MIT",
@@ -61,7 +75,7 @@
 		"@types/jest": "^29.4.0",
 		"@typescript-eslint/eslint-plugin": "^5.54.0",
 		"@typescript-eslint/parser": "^5.54.0",
-		"alova": "^2.0.4",
+		"alova": "^2.0.12",
 		"babel-jest": "^29.2.2",
 		"coveralls": "^3.1.1",
 		"cross-env": "5.2.0",

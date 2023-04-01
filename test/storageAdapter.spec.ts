@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro';
 import { createAlova, getMethodKey, invalidateCache } from 'alova';
-import AdapterTaro from '../src/index';
+import AdapterTaro from '../src/adapterReact';
 import { mockStorageContainer } from './utils';
 
 jest.mock('@tarojs/taro');
