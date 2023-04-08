@@ -1,6 +1,6 @@
 {
 	"name": "@alova/adapter-taro",
-	"version": "1.2.0-alpha",
+	"version": "1.2.0",
 	"description": "taro adapter for alova.js",
 	"homepage": "https://alova.js.org",
 	"main": "dist/alova-adapter-taro.esm.js",
@@ -31,8 +31,9 @@
 		"build:vue:umd.min": "cross-env NODE_ENV=production MODULE=vue rollup -c config/rollup.config.umd.js",
 		"build:vue": "npm run build:vue:esm && npm run build:vue:umd && npm run build:vue:umd.min",
 		"build": "npm run clean && npm run build:esm && npm run build:umd && npm run build:umd.min && npm run build:vue",
-		"release": "npm publish",
-		"coveralls": "npm run test:coverage && coveralls < coverage/lcov.info"
+		"release": "semantic-release",
+		"coveralls": "npm run test:coverage && coveralls < coverage/lcov.info",
+		"commit": "git add . && git-cz && git push"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -65,10 +66,12 @@
 		"@alova/mock": "^1.1.1",
 		"@babel/core": "^7.18.2",
 		"@babel/preset-env": "^7.18.2",
+		"@commitlint/config-conventional": "^17.4.4",
 		"@rollup/plugin-commonjs": "^22.0.0",
 		"@rollup/plugin-json": "^4.1.0",
 		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@rollup/plugin-replace": "^4.0.0",
+		"@semantic-release/git": "^10.0.1",
 		"@tarojs/shared": "^3.6.2",
 		"@tarojs/taro": "^3.6.2",
 		"@testing-library/jest-dom": "^5.16.4",
@@ -77,11 +80,15 @@
 		"@typescript-eslint/parser": "^5.54.0",
 		"alova": "^2.0.12",
 		"babel-jest": "^29.2.2",
+		"commitizen": "^4.3.0",
+		"commitlint": "^17.5.1",
 		"coveralls": "^3.1.1",
 		"cross-env": "5.2.0",
+		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.35.0",
 		"eslint-config-prettier": "^8.6.0",
 		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.3",
 		"jest": "^29.4.3",
 		"jest-environment-jsdom": "^29.2.2",
 		"prettier": "^2.7.1",
@@ -96,5 +103,10 @@
 		"tslib": "^2.4.0",
 		"typescript": "^4.7.2",
 		"vue": "^3.2.47"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
