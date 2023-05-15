@@ -19,11 +19,12 @@ const getCompiler = (
 ) => typescript(opt);
 exports.getCompiler = getCompiler;
 
-const pkg = JSON.parse(readFileSync('package.json').toString() || '{}');
-const { version, author, homepage } = pkg;
+const pkg = require('../package.json');
+const version = process.env.VERSION || pkg.version;
+const { author, homepage, name } = pkg;
 const repository = pkg.repository.url.replace('git', 'https').replace('.git', '');
 exports.banner = `/**
-  * ${pkg.name} ${version} (${homepage})
+  * ${name} ${version} (${homepage})
   * Copyright ${new Date().getFullYear()} ${author}. All Rights Reserved
   * Licensed under MIT (${repository}/blob/master/LICENSE)
   */
@@ -37,7 +38,7 @@ const compilePaths = {
 		output: suffix => `dist/alova-adapter-taro.${suffix}.js`
 	},
 	vue: {
-		external: ['alova', 'alova/react', '@tarojs/taro'],
+		external: ['alova', 'alova/vue', '@tarojs/taro'],
 		packageName: 'AlovaAdapterTaroVue',
 		input: 'src/adapterVue.ts',
 		output: suffix => `dist/alova-adapter-taro-vue.${suffix}.js`
